@@ -25,9 +25,9 @@ import static com.github.athingx.athing.aliyun.modular.core.JsonSerializerImpl.s
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
- * 设备模块组件实现
+ * 默认设备模块组件
  */
-public class ModularThingComImpl implements ModularThingCom, Initializing, ProcessStep {
+public class DefaultModularThingCom implements ModularThingCom, Initializing, ProcessStep {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final Gson gson = GsonUtils.gson;
@@ -39,7 +39,12 @@ public class ModularThingComImpl implements ModularThingCom, Initializing, Proce
     private ThingMessenger messenger;
     private volatile ModuleUpgradeListener listener;
 
-    public ModularThingComImpl(ModularOption option) {
+    /**
+     * 默认设备模块组件
+     *
+     * @param option 模块选项
+     */
+    public DefaultModularThingCom(ModularOption option) {
         this.option = option;
     }
 

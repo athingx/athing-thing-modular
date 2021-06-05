@@ -8,7 +8,7 @@ import com.github.athingx.athing.aliyun.thing.runtime.executor.ThingPromise;
 /**
  * 升级提交器实现
  */
-public class CommitterImpl implements Committer, ProcessStep {
+class CommitterImpl implements Committer, ProcessStep {
 
     private final Meta meta;
     private final ThingPromise<Void> promise;

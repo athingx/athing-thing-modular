@@ -1,7 +1,7 @@
 package com.github.athingx.athing.aliyun.modular.boot;
 
 import com.github.athingx.athing.aliyun.modular.core.ModularOption;
-import com.github.athingx.athing.aliyun.modular.core.ModularThingComImpl;
+import com.github.athingx.athing.aliyun.modular.core.DefaultModularThingCom;
 import com.github.athingx.athing.standard.component.ThingCom;
 import com.github.athingx.athing.standard.thing.boot.BootArguments;
 import com.github.athingx.athing.standard.thing.boot.ThingComBoot;
@@ -25,7 +25,7 @@ public class BootImpl implements ThingComBoot {
         // 下载升级包超时时间，默认：3分钟
         option.setTimeoutMs(arguments.getArgument(OPT_TIMEOUT, cLong, 3L * 1000 * 60));
 
-        return new ModularThingComImpl(option);
+        return new DefaultModularThingCom(option);
     }
 
 }

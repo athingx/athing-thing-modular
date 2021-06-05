@@ -19,7 +19,7 @@ import static java.lang.String.format;
 /**
  * 模块升级包实现
  */
-public class ModuleUpgradeImpl implements ModuleUpgrade, ProcessStep {
+class ModuleUpgradeImpl implements ModuleUpgrade, ProcessStep {
 
     private final Meta meta;
     private final com.github.athingx.athing.aliyun.modular.core.ModularOption option;
