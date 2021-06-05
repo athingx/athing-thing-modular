@@ -1,4 +1,4 @@
-package com.github.athingx.athing.aliyun.modular.core;
+package com.github.athingx.athing.aliyun.modular.component;
 
 import static java.lang.String.format;
 

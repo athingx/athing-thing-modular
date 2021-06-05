@@ -1,13 +1,13 @@
-package com.github.athingx.athing.aliyun.modular.core;
+package com.github.athingx.athing.aliyun.modular.component;
 
 import com.github.athingx.athing.aliyun.modular.api.ModularThingCom;
 import com.github.athingx.athing.aliyun.modular.api.ModuleUpgradeListener;
 import com.github.athingx.athing.aliyun.modular.api.ProcessStep;
-import com.github.athingx.athing.aliyun.modular.core.domain.Meta;
-import com.github.athingx.athing.aliyun.modular.core.domain.Post;
-import com.github.athingx.athing.aliyun.modular.core.domain.Push;
-import com.github.athingx.athing.aliyun.modular.core.domain.Process;
-import com.github.athingx.athing.aliyun.modular.core.util.GsonUtils;
+import com.github.athingx.athing.aliyun.modular.component.domain.Meta;
+import com.github.athingx.athing.aliyun.modular.component.domain.Post;
+import com.github.athingx.athing.aliyun.modular.component.domain.Push;
+import com.github.athingx.athing.aliyun.modular.component.domain.Process;
+import com.github.athingx.athing.aliyun.modular.component.util.GsonUtils;
 import com.github.athingx.athing.aliyun.thing.runtime.ThingRuntime;
 import com.github.athingx.athing.aliyun.thing.runtime.ThingRuntimes;
 import com.github.athingx.athing.aliyun.thing.runtime.executor.ThingExecutor;
@@ -21,7 +21,7 @@ import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.github.athingx.athing.aliyun.modular.core.JsonSerializerImpl.serializer;
+import static com.github.athingx.athing.aliyun.modular.component.JsonSerializerImpl.serializer;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
@@ -156,7 +156,7 @@ public class DefaultModularThingCom implements ModularThingCom, Initializing, Pr
                 // 开始升级
                 listener.upgrade(
                         push.getToken(),
-                        new com.github.athingx.athing.aliyun.modular.core.ModuleUpgradeImpl(meta, option, executor) {
+                        new com.github.athingx.athing.aliyun.modular.component.ModuleUpgradeImpl(meta, option, executor) {
 
                             @Override
                             protected void processing(int step, String desc) {
@@ -164,7 +164,7 @@ public class DefaultModularThingCom implements ModularThingCom, Initializing, Pr
                             }
 
                         },
-                        new com.github.athingx.athing.aliyun.modular.core.CommitterImpl(meta, promise)
+                        new com.github.athingx.athing.aliyun.modular.component.CommitterImpl(meta, promise)
                 );
             });
 

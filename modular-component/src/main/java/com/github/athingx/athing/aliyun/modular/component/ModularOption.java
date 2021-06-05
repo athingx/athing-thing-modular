@@ -1,4 +1,4 @@
-package com.github.athingx.athing.aliyun.modular.core;
+package com.github.athingx.athing.aliyun.modular.component;
 
 /**
  * 模块组件选项

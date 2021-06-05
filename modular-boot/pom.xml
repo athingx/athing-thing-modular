@@ -51,7 +51,7 @@
         </dependency>
         <dependency>
             <groupId>com.github.athingx.athing.aliyun.modular</groupId>
-            <artifactId>modular-core</artifactId>
+            <artifactId>modular-component</artifactId>
             <version>${project.version}</version>
             <exclusions>
                 <exclusion>

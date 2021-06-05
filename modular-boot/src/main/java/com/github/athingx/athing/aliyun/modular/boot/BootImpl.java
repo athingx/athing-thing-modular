@@ -1,7 +1,7 @@
 package com.github.athingx.athing.aliyun.modular.boot;
 
-import com.github.athingx.athing.aliyun.modular.core.ModularOption;
-import com.github.athingx.athing.aliyun.modular.core.DefaultModularThingCom;
+import com.github.athingx.athing.aliyun.modular.component.ModularOption;
+import com.github.athingx.athing.aliyun.modular.component.DefaultModularThingCom;
 import com.github.athingx.athing.standard.component.ThingCom;
 import com.github.athingx.athing.standard.thing.boot.BootArguments;
 import com.github.athingx.athing.standard.thing.boot.ThingComBoot;

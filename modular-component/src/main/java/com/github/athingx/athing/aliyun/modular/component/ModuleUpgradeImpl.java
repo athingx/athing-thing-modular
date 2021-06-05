@@ -1,10 +1,10 @@
-package com.github.athingx.athing.aliyun.modular.core;
+package com.github.athingx.athing.aliyun.modular.component;
 
 import com.github.athingx.athing.aliyun.modular.api.ModuleUpgrade;
 import com.github.athingx.athing.aliyun.modular.api.ProcessStep;
-import com.github.athingx.athing.aliyun.modular.core.domain.Meta;
-import com.github.athingx.athing.aliyun.modular.core.util.FileUtils;
-import com.github.athingx.athing.aliyun.modular.core.util.HttpUtils;
+import com.github.athingx.athing.aliyun.modular.component.domain.Meta;
+import com.github.athingx.athing.aliyun.modular.component.util.FileUtils;
+import com.github.athingx.athing.aliyun.modular.component.util.HttpUtils;
 import com.github.athingx.athing.aliyun.thing.runtime.executor.ThingExecutor;
 import com.github.athingx.athing.standard.thing.ThingFuture;
 
@@ -22,11 +22,11 @@ import static java.lang.String.format;
 class ModuleUpgradeImpl implements ModuleUpgrade, ProcessStep {
 
     private final Meta meta;
-    private final com.github.athingx.athing.aliyun.modular.core.ModularOption option;
+    private final com.github.athingx.athing.aliyun.modular.component.ModularOption option;
     private final ThingExecutor executor;
     private final AtomicReference<ThingFuture<File>> futureRef = new AtomicReference<>();
 
-    public ModuleUpgradeImpl(Meta meta, com.github.athingx.athing.aliyun.modular.core.ModularOption option, ThingExecutor executor) {
+    public ModuleUpgradeImpl(Meta meta, com.github.athingx.athing.aliyun.modular.component.ModularOption option, ThingExecutor executor) {
         this.meta = meta;
         this.option = option;
         this.executor = executor;

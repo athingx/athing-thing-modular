@@ -1,4 +1,4 @@
-package com.github.athingx.athing.aliyun.modular.core.util;
+package com.github.athingx.athing.aliyun.modular.component.util;
 
 public class StringUtils {
 

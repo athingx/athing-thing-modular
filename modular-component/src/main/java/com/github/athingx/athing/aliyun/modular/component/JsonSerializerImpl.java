@@ -1,6 +1,6 @@
-package com.github.athingx.athing.aliyun.modular.core;
+package com.github.athingx.athing.aliyun.modular.component;
 
-import com.github.athingx.athing.aliyun.modular.core.util.GsonUtils;
+import com.github.athingx.athing.aliyun.modular.component.util.GsonUtils;
 import com.github.athingx.athing.aliyun.thing.runtime.messenger.JsonSerializer;
 
 class JsonSerializerImpl implements JsonSerializer {

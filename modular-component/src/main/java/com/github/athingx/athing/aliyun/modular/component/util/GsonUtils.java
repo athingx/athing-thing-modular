@@ -1,4 +1,4 @@
-package com.github.athingx.athing.aliyun.modular.core.util;
+package com.github.athingx.athing.aliyun.modular.component.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
