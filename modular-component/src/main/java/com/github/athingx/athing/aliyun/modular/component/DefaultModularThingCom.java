@@ -156,7 +156,7 @@ public class DefaultModularThingCom implements ModularThingCom, Initializing, Pr
                 // 开始升级
                 listener.upgrade(
                         push.getToken(),
-                        new com.github.athingx.athing.aliyun.modular.component.ModuleUpgradeImpl(meta, option, executor) {
+                        new ModuleUpgradeImpl(meta, option, executor) {
 
                             @Override
                             protected void processing(int step, String desc) {
@@ -164,7 +164,7 @@ public class DefaultModularThingCom implements ModularThingCom, Initializing, Pr
                             }
 
                         },
-                        new com.github.athingx.athing.aliyun.modular.component.CommitterImpl(meta, promise)
+                        new CommitterImpl(meta, promise)
                 );
             });
 
