@@ -3,7 +3,7 @@ package com.github.athingx.athing.aliyun.modular.component;
 import com.github.athingx.athing.aliyun.modular.api.Committer;
 import com.github.athingx.athing.aliyun.modular.api.ProcessStep;
 import com.github.athingx.athing.aliyun.modular.component.domain.Meta;
-import com.github.athingx.athing.aliyun.thing.runtime.executor.ThingPromise;
+import com.github.athingx.athing.standard.thing.op.executor.ThingPromise;
 
 /**
  * 升级提交器实现

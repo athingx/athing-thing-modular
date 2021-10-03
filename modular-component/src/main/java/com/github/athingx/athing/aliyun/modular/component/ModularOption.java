@@ -8,12 +8,12 @@ public class ModularOption {
     /**
      * 下载升级文件连接超时时间
      */
-    private long connectTimeoutMs;
+    private long connectTimeoutMs = 1000L * 60;
 
     /**
      * 下载升级文件超时时间
      */
-    private long timeoutMs;
+    private long timeoutMs = 3L * 1000 * 60;
 
     public long getConnectTimeoutMs() {
         return connectTimeoutMs;

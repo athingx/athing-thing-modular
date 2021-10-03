@@ -94,7 +94,6 @@
 
     <modules>
         <module>modular-api</module>
-        <module>modular-boot</module>
         <module>modular-component</module>
     </modules>
 </project>

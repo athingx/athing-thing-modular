@@ -1,7 +1,7 @@
 package com.github.athingx.athing.aliyun.modular.api;
 
 import com.github.athingx.athing.standard.component.ThingCom;
-import com.github.athingx.athing.standard.thing.ThingFuture;
+import com.github.athingx.athing.standard.thing.op.executor.ThingFuture;
 
 /**
  * 设备模块组件

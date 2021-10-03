@@ -5,8 +5,8 @@ import com.github.athingx.athing.aliyun.modular.api.ProcessStep;
 import com.github.athingx.athing.aliyun.modular.component.domain.Meta;
 import com.github.athingx.athing.aliyun.modular.component.util.FileUtils;
 import com.github.athingx.athing.aliyun.modular.component.util.HttpUtils;
-import com.github.athingx.athing.aliyun.thing.runtime.executor.ThingExecutor;
-import com.github.athingx.athing.standard.thing.ThingFuture;
+import com.github.athingx.athing.standard.thing.op.executor.ThingExecutor;
+import com.github.athingx.athing.standard.thing.op.executor.ThingFuture;
 
 import java.io.File;
 import java.net.URL;

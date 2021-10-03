@@ -5,7 +5,7 @@ import static java.lang.String.format;
 /**
  * 模块升级异常
  */
-public class ModuleUpgradeProcessException extends Exception {
+class ModuleUpgradeProcessException extends Exception {
 
     private final String moduleId;
     private final int step;

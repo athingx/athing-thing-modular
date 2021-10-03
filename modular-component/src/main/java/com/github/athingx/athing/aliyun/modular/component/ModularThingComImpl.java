@@ -10,13 +10,13 @@ import com.github.athingx.athing.aliyun.modular.component.domain.Process;
 import com.github.athingx.athing.aliyun.modular.component.util.GsonUtils;
 import com.github.athingx.athing.aliyun.thing.runtime.ThingRuntime;
 import com.github.athingx.athing.aliyun.thing.runtime.ThingRuntimes;
-import com.github.athingx.athing.aliyun.thing.runtime.executor.ThingExecutor;
-import com.github.athingx.athing.aliyun.thing.runtime.executor.ThingPromise;
-import com.github.athingx.athing.aliyun.thing.runtime.messenger.ThingMessenger;
+import com.github.athingx.athing.aliyun.thing.runtime.linker.ThingLinker;
 import com.github.athingx.athing.aliyun.thing.runtime.mqtt.ThingMqtt;
 import com.github.athingx.athing.standard.thing.Thing;
-import com.github.athingx.athing.standard.thing.ThingFuture;
 import com.github.athingx.athing.standard.thing.boot.Initializing;
+import com.github.athingx.athing.standard.thing.op.executor.ThingExecutor;
+import com.github.athingx.athing.standard.thing.op.executor.ThingFuture;
+import com.github.athingx.athing.standard.thing.op.executor.ThingPromise;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 /**
  * 默认设备模块组件
  */
-public class DefaultModularThingCom implements ModularThingCom, Initializing, ProcessStep {
+public class ModularThingComImpl implements ModularThingCom, Initializing, ProcessStep {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final Gson gson = GsonUtils.gson;
@@ -36,7 +36,7 @@ public class DefaultModularThingCom implements ModularThingCom, Initializing, Pr
     private Thing thing;
     private ThingMqtt mqtt;
     private ThingExecutor executor;
-    private ThingMessenger messenger;
+    private ThingLinker linker;
     private volatile ModuleUpgradeListener listener;
 
     /**
@@ -44,13 +44,13 @@ public class DefaultModularThingCom implements ModularThingCom, Initializing, Pr
      *
      * @param option 模块选项
      */
-    public DefaultModularThingCom(ModularOption option) {
+    public ModularThingComImpl(ModularOption option) {
         this.option = option;
     }
 
     @Override
     public ThingFuture<Void> post(String moduleId, String version) {
-        return messenger.post(
+        return linker.post(
                 serializer,
                 String.format("/ota/device/inform/%s/%s", thing.getProductId(), thing.getThingId()),
                 token -> new Post(token, moduleId, version)
@@ -67,8 +67,8 @@ public class DefaultModularThingCom implements ModularThingCom, Initializing, Pr
         final ThingRuntime runtime = ThingRuntimes.getThingRuntime(thing);
         this.thing = thing;
         this.mqtt = runtime.getThingMqtt();
-        this.executor = runtime.getThingExecutor();
-        this.messenger = runtime.getThingMessenger();
+        this.linker = runtime.getThingLinker();
+        this.executor = thing.getThingOp().getThingExecutor();
 
         logger.info("{}/modular init completed, connect-timeout={};timeout={};",
                 thing,
@@ -110,7 +110,7 @@ public class DefaultModularThingCom implements ModularThingCom, Initializing, Pr
      * @return 报告存根
      */
     private ThingFuture<Void> postUpgradeProcess(Meta meta, int step, String desc) {
-        return messenger.post(
+        return linker.post(
                 serializer,
                 String.format("/ota/device/progress/%s/%s", thing.getProductId(), thing.getThingId()),
                 token -> new Process(token, meta.getModuleId(), step, desc)
