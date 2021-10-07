@@ -93,7 +93,6 @@
     </build>
 
     <modules>
-        <module>modular-api</module>
-        <module>modular-component</module>
+        <module>modular-thing</module>
     </modules>
 </project>
