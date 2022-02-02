@@ -24,7 +24,7 @@
     </developers>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.github.athingx.athing.aliyun.modular</groupId>
+    <groupId>io.github.athingx.athing.aliyun.modular</groupId>
     <artifactId>modular</artifactId>
     <packaging>pom</packaging>
     <version>${revision}</version>
@@ -94,5 +94,6 @@
 
     <modules>
         <module>modular-thing</module>
+        <module>modular-thing-impl</module>
     </modules>
 </project>
