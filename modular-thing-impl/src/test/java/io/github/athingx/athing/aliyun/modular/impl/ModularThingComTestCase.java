@@ -3,11 +3,14 @@ package io.github.athingx.athing.aliyun.modular.impl;
 import io.github.athingx.athing.aliyun.modular.ModularThingCom;
 import io.github.athingx.athing.aliyun.modular.ModuleUpgrade;
 import io.github.athingx.athing.aliyun.modular.ModuleUpgradeListener;
+import io.github.athingx.athing.standard.thing.boot.ThingBoot;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
+
+import static io.github.athingx.athing.aliyun.common.util.CommonUtils.isBlankString;
 
 public class ModularThingComTestCase extends ThingSupport {
 
@@ -46,6 +49,15 @@ public class ModularThingComTestCase extends ThingSupport {
             component.removeListener(listener);
         }
 
+    }
+
+    @Test
+    public void test$thing$modular$boot() {
+        final ThingBoot boot = new ModularThingBoot();
+        Assert.assertEquals("athing", boot.getProperties().getProperty("manufacturer"));
+        Assert.assertEquals("athing-aliyun-modular", boot.getProperties().getProperty("model"));
+        Assert.assertEquals("oldmanpushcart@gmail.com", boot.getProperties().getProperty("author"));
+        Assert.assertEquals("${project.version}", boot.getProperties().getProperty("version"));
     }
 
 }

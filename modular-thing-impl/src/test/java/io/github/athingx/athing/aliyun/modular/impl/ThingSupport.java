@@ -1,7 +1,7 @@
 package io.github.athingx.athing.aliyun.modular.impl;
 
-import io.github.athingx.athing.aliyun.thing.ThingAccess;
 import io.github.athingx.athing.aliyun.thing.ThingBuilder;
+import io.github.athingx.athing.aliyun.thing.runtime.access.ThingAccess;
 import io.github.athingx.athing.standard.thing.Thing;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

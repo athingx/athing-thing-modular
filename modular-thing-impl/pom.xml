@@ -18,7 +18,7 @@
                 <directory>../modular-thing-impl/src/main/resources</directory>
                 <filtering>true</filtering>
                 <includes>
-                    <include>modular-thing-boot.properties</include>
+                    <include>io/github/athingx/athing/aliyun/modular/impl/modular-thing-boot.properties</include>
                 </includes>
             </resource>
         </resources>
@@ -26,6 +26,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4</version>
                 <executions>
                     <execution>
                         <goals>
@@ -64,7 +65,8 @@
         <dependency>
             <groupId>io.github.athingx.athing.aliyun.modular</groupId>
             <artifactId>modular-thing</artifactId>
-            <version>${athing.version}</version>
+            <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.kohsuke.metainf-services</groupId>
