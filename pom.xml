@@ -9,9 +9,9 @@
     </parent>
 
     <scm>
-        <connection>scm:git:git@github.com:athingx/athing-aliyun-modular.git</connection>
-        <developerConnection>scm:git:git@github.com:athingx/athing-aliyun-modular.git</developerConnection>
-        <url>https://github.com/athingx/athing-aliyun-modular</url>
+        <connection>scm:git:git@github.com:athingx/athing-thing-modular.git</connection>
+        <developerConnection>scm:git:git@github.com:athingx/athing-thing-modular.git</developerConnection>
+        <url>https://github.com/athingx/athing-thing-modular</url>
         <tag>HEAD</tag>
     </scm>
 
@@ -24,13 +24,13 @@
     </developers>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.github.athingx.athing.aliyun.modular</groupId>
-    <artifactId>modular</artifactId>
+    <groupId>io.github.athingx.athing.thing.modular</groupId>
+    <artifactId>athing-thing-modular</artifactId>
     <packaging>pom</packaging>
     <version>${revision}</version>
     <name>${project.artifactId}</name>
-    <description>athing aliyun component: modular</description>
-    <url>https://github.com/athingx/athing-aliyun-modular</url>
+    <description>athing thing component: modular</description>
+    <url>https://github.com/athingx/athing-thing-modular</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -43,10 +43,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>3.9.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>17</source>
+                    <target>17</target>
                     <encoding>UTF-8</encoding>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
@@ -54,12 +54,31 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>2.4</version>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <phase>verify</phase>
                         <goals>
                             <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <doclint>none</doclint>
+                    <source>17</source>
+                    <failOnError>false</failOnError>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>release</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -93,7 +112,7 @@
     </build>
 
     <modules>
-        <module>modular-thing</module>
-        <module>modular-thing-impl</module>
+        <module>thing-modular</module>
+        <module>thing-modular-aliyun</module>
     </modules>
 </project>

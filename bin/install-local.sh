@@ -1,7 +1,7 @@
 #!/bin/bash
 
-projects[i++]="io.github.athingx.athing.aliyun.modular:modular-thing"
-projects[i++]="io.github.athingx.athing.aliyun.modular:modular-thing-impl"
+projects[i++]="io.github.athingx.athing.thing.modular:thing-modular"
+projects[i++]="io.github.athingx.athing.thing.modular:thing-modular-aliyun"
 
 mvn clean install \
   -f ../pom.xml \
