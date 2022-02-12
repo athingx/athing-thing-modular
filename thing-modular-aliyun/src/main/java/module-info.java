@@ -6,8 +6,9 @@ module io.github.athingx.athing.thing.modular.aliyun {
     requires com.google.gson;
     requires metainf.services;
 
-    opens io.github.athingx.athing.thing.modular.aliyun.domain to com.google.gson;
+    exports io.github.athingx.athing.thing.modular.aliyun;
 
+    opens io.github.athingx.athing.thing.modular.aliyun.domain to com.google.gson;
     provides io.github.athingx.athing.standard.thing.boot.ThingBoot with io.github.athingx.athing.thing.modular.aliyun.ModularThingBoot;
 
 }
