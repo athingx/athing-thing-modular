@@ -4,7 +4,7 @@ module io.github.athingx.athing.thing.modular.aliyun {
     requires io.github.athingx.athing.aliyun.thing.runtime;
     requires org.slf4j;
     requires com.google.gson;
-    requires metainf.services;
+    requires static metainf.services;
 
     exports io.github.athingx.athing.thing.modular.aliyun;
 
