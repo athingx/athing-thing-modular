@@ -51,7 +51,7 @@ public class ThingSupport {
 
     private static Thing initPuppetThing() throws Exception {
         final Thing thing = new ThingBuilder(new URI($("athing.thing.server-url")), THING_ACCESS)
-                .load((productId, thingId) -> new ModularThingBoot().boot(PRODUCT_ID, THING_ID))
+                .load((productId, thingId) -> new ThingModularBoot().boot(PRODUCT_ID, THING_ID))
                 .build();
         reconnect(thing);
         return thing;

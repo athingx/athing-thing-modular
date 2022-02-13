@@ -3,7 +3,7 @@ package io.github.athingx.athing.thing.modular.aliyun;
 /**
  * 升级处理器，用来处理升级过程
  */
-public interface UpgradeProcessor {
+interface UpgradeProcessor {
 
     /**
      * 进度报告

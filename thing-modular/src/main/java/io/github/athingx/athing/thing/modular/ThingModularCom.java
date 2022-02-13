@@ -7,7 +7,7 @@ import io.github.oldmanpushcart.jpromisor.ListenableFuture;
 /**
  * 设备模块组件
  */
-public interface ModularThingCom extends ThingCom {
+public interface ThingModularCom extends ThingCom {
 
     /**
      * 更新模块版本

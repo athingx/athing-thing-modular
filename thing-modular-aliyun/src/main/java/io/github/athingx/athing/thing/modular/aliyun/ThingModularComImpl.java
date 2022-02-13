@@ -7,7 +7,7 @@ import io.github.athingx.athing.standard.thing.Thing;
 import io.github.athingx.athing.standard.thing.ThingLifeCycle;
 import io.github.athingx.athing.standard.thing.boot.Inject;
 import io.github.athingx.athing.standard.thing.op.executor.ThingExecutor;
-import io.github.athingx.athing.thing.modular.ModularThingCom;
+import io.github.athingx.athing.thing.modular.ThingModularCom;
 import io.github.athingx.athing.thing.modular.ModuleUpgrade;
 import io.github.athingx.athing.thing.modular.ModuleUpgradeListener;
 import io.github.athingx.athing.thing.modular.aliyun.domain.Meta;
@@ -26,7 +26,7 @@ import static io.github.athingx.athing.thing.modular.aliyun.UpgradeProcessor.Ste
 import static io.github.athingx.athing.thing.modular.aliyun.UpgradeProcessor.Step.STEP_UPGRADES_FAILURE;
 import static java.lang.String.format;
 
-class ModularThingComImpl implements ModularThingCom, ThingLifeCycle {
+class ThingModularComImpl implements ThingModularCom, ThingLifeCycle {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final Gson gson = GsonUtils.gson;
@@ -36,7 +36,7 @@ class ModularThingComImpl implements ModularThingCom, ThingLifeCycle {
     @Inject
     private ThingRuntime runtime;
 
-    public ModularThingComImpl(ModularOption option) {
+    public ThingModularComImpl(ModularOption option) {
         this.option = option;
     }
 
