@@ -26,11 +26,11 @@ public class ThingModularBoot implements ThingBoot {
 
     private ModularOption toOption(ThingBootArgument arguments) {
         final ModularOption option = new ModularOption();
-        if (arguments.hasArguments("timeout")) {
-            option.setTimeoutMs(arguments.getArgument("timeout", cLong));
+        if (arguments.hasArguments("timeout_ms")) {
+            option.setTimeoutMs(arguments.getArgument("timeout_ms", cLong));
         }
-        if (arguments.hasArguments("connect-timeout")) {
-            option.setConnectTimeoutMs(arguments.getArgument("connect-timeout", cLong));
+        if (arguments.hasArguments("connect_timeout_ms")) {
+            option.setConnectTimeoutMs(arguments.getArgument("connect_timeout_ms", cLong));
         }
         return option;
     }
