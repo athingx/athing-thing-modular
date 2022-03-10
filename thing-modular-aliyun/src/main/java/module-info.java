@@ -3,7 +3,7 @@ module io.github.athingx.athing.thing.modular.aliyun {
     requires io.github.athingx.athing.thing.modular;
     requires io.github.athingx.athing.aliyun.thing.runtime;
     requires com.google.gson;
-    requires static org.slf4j;
+    requires org.slf4j;
 
     exports io.github.athingx.athing.thing.modular.aliyun;
 
