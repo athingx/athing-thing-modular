@@ -3,7 +3,6 @@ package io.github.athingx.athing.thing.modular.aliyun;
 import io.github.athingx.athing.standard.component.ThingCom;
 import io.github.athingx.athing.standard.thing.boot.ThingBoot;
 import io.github.athingx.athing.standard.thing.boot.ThingBootArgument;
-import org.kohsuke.MetaInfServices;
 
 import java.io.InputStream;
 import java.util.Properties;
@@ -14,7 +13,6 @@ import static io.github.athingx.athing.standard.thing.boot.ThingBootArgument.Con
 /**
  * 设备模块组件引导程序
  */
-@MetaInfServices
 public class ThingModularBoot implements ThingBoot {
 
     @Override
