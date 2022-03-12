@@ -70,9 +70,6 @@ class ThingModularComImpl implements ThingModularCom, ThingLifeCycle {
         synchronized (listeners) {
             clones = new LinkedHashSet<>(listeners);
         }
-        if (clones.isEmpty()) {
-            throw new Exception("none upgrade-listener!");
-        }
         for (final ModuleUpgradeListener listener : clones) {
             listener.upgrade(upgrade);
         }
@@ -92,8 +89,13 @@ class ThingModularComImpl implements ThingModularCom, ThingLifeCycle {
             final Meta meta = push.getMeta();
             final UpgradeProcessor processor = new UpgradeProcessorImpl(meta);
 
-            final ModuleUpgrade upgrade = new ModuleUpgradeImpl(meta, option, executor, processor);
+            if (listeners.isEmpty()) {
+                logger.warn("{}/modular give up upgrade: none-listener, modular={};version={};", thing, meta.getModuleId(), meta.getVersion());
+                processor.processing(STEP_UPGRADES_FAILURE, "upgrade failure: none upgrade-listener");
+                return;
+            }
 
+            final ModuleUpgrade upgrade = new ModuleUpgradeImpl(meta, option, executor, processor);
             try {
 
                 // 执行模块升级动作
