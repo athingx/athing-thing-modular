@@ -76,9 +76,8 @@ class ThingModularComImpl implements ThingModularCom, ThingLifeCycle {
     }
 
     @Override
-    public void onLoaded() throws Exception {
+    public void onLoaded(Thing thing) throws Exception {
 
-        final Thing thing = runtime.getThing();
         final ThingLinker linker = runtime.getThingLinker();
         final ThingExecutor executor = thing.getThingOp().getThingExecutor();
 
