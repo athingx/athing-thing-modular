@@ -49,13 +49,4 @@ public class ThingModularComTestCase extends ThingSupport {
 
     }
 
-    @Test
-    public void test$thing$modular$boot() {
-        final ThingBoot boot = new ThingModularBoot();
-        Assert.assertEquals("${project.groupId}", boot.getProperties().getProperty(ThingBoot.PROP_GROUP));
-        Assert.assertEquals("${project.artifactId}", boot.getProperties().getProperty(ThingBoot.PROP_ARTIFACT));
-        Assert.assertEquals("${project.version}", boot.getProperties().getProperty(ThingBoot.PROP_VERSION));
-        Assert.assertEquals("aliyun", boot.getProperties().getProperty(ThingBoot.PROP_PLATFORM_LIMIT));
-    }
-
 }
