@@ -24,26 +24,19 @@ public class ThingModularBoot implements ThingBoot {
 
     private ModularOption toOption(ThingBootArgument arguments) {
         final ModularOption option = new ModularOption();
-        if (arguments.hasArguments("timeout_ms")) {
-            option.setTimeoutMs(arguments.getArgument("timeout_ms", cLong));
-        }
-        if (arguments.hasArguments("connect_timeout_ms")) {
-            option.setConnectTimeoutMs(arguments.getArgument("connect_timeout_ms", cLong));
+        if(null != arguments) {
+            arguments.optionArgument("timeout_ms", cLong, option::setTimeoutMs);
+            arguments.optionArgument("connect_timeout_ms", cLong, option::setConnectTimeoutMs);
         }
         return option;
     }
 
     @Override
     public Properties getProperties() {
-        final Properties prop = ThingBoot.super.getProperties();
-        try (final InputStream in = ThingModularBoot.class.getResourceAsStream("/io/github/athingx/athing/thing/modular/aliyun/thing-boot.properties")) {
-            if (null != in) {
-                prop.load(in);
-            }
-        } catch (Exception cause) {
-            // ignore...
-        }
-        return prop;
+        return new Properties(){{
+           put(PROP_GROUP, "io.github.athingx.athing.thing.modular");
+           put(PROP_ARTIFACT, "thing-modular-aliyun");
+        }};
     }
 
 }

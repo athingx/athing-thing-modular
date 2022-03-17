@@ -21,6 +21,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 import static io.github.athingx.athing.thing.modular.aliyun.UpgradeProcessor.Step.STEP_UPGRADES_COMPLETED;
 import static io.github.athingx.athing.thing.modular.aliyun.UpgradeProcessor.Step.STEP_UPGRADES_FAILURE;
@@ -31,7 +33,7 @@ class ThingModularComImpl implements ThingModularCom, ThingLifeCycle {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final Gson gson = GsonUtils.gson;
     private final ModularOption option;
-    private final Set<ModuleUpgradeListener> listeners = new LinkedHashSet<>();
+    private final Set<ModuleUpgradeListener> listeners = new ConcurrentHashMap<ModuleUpgradeListener, Object>().keySet();
 
     @Inject
     private ThingRuntime runtime;
@@ -52,25 +54,17 @@ class ThingModularComImpl implements ThingModularCom, ThingLifeCycle {
 
     @Override
     public void appendListener(ModuleUpgradeListener listener) {
-        synchronized (listeners) {
-            listeners.add(listener);
-        }
+        listeners.add(listener);
     }
 
     @Override
     public void removeListener(ModuleUpgradeListener listener) {
-        synchronized (listeners) {
-            listeners.remove(listener);
-        }
+        listeners.remove(listener);
     }
 
     // 模块升级通知到升级监听器
     private void upgradeModule(ModuleUpgrade upgrade) throws Exception {
-        final Set<ModuleUpgradeListener> clones;
-        synchronized (listeners) {
-            clones = new LinkedHashSet<>(listeners);
-        }
-        for (final ModuleUpgradeListener listener : clones) {
+        for (final ModuleUpgradeListener listener : listeners) {
             listener.upgrade(upgrade);
         }
     }
