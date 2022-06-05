@@ -1,6 +1,6 @@
 module io.github.athingx.athing.thing.modular.aliyun {
 
-    requires io.github.athingx.athing.thing.modular;
+    requires transitive io.github.athingx.athing.thing.modular;
     requires io.github.athingx.athing.aliyun.thing.runtime;
     requires com.google.gson;
     requires org.slf4j;
