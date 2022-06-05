@@ -1,7 +1,5 @@
 package io.github.athingx.athing.thing.modular.aliyun;
 
-import io.github.athingx.athing.standard.thing.boot.ThingBoot;
-import io.github.athingx.athing.thing.modular.ThingModularCom;
 import io.github.athingx.athing.thing.modular.ModuleUpgrade;
 import io.github.athingx.athing.thing.modular.ModuleUpgradeListener;
 import org.junit.Assert;
@@ -21,7 +19,6 @@ public class ThingModularComTestCase extends ThingSupport {
     @Test
     public void test$thing$modular$push_upgrade() throws Exception {
 
-        final ThingModularCom component = thing.getUniqueThingCom(ThingModularCom.class);
         final CountDownLatch latch = new CountDownLatch(1);
         final AtomicReference<ModuleUpgrade> upgradeRef = new AtomicReference<>();
 
@@ -31,10 +28,10 @@ public class ThingModularComTestCase extends ThingSupport {
             latch.countDown();
         };
 
-        component.appendListener(listener);
+        thingModularCom.appendListener(listener);
 
         try {
-            component.update("resource", "1.0.0").sync();
+            thingModularCom.update("resource", "1.0.0").sync();
             latch.await();
 
             final ModuleUpgrade upgrade = upgradeRef.get();
@@ -44,7 +41,7 @@ public class ThingModularComTestCase extends ThingSupport {
             Assert.assertTrue(upgrade.getFile().get().isFile());
 
         } finally {
-            component.removeListener(listener);
+            thingModularCom.removeListener(listener);
         }
 
     }

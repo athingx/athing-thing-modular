@@ -3,7 +3,7 @@ package io.github.athingx.athing.thing.modular.aliyun;
 import io.github.athingx.athing.aliyun.thing.ThingBuilder;
 import io.github.athingx.athing.aliyun.thing.runtime.access.ThingAccess;
 import io.github.athingx.athing.standard.thing.Thing;
-import io.github.athingx.athing.standard.thing.boot.ThingBootArgument;
+import io.github.athingx.athing.thing.modular.ThingModularCom;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.Properties;
+import java.util.concurrent.Executors;
 
 import static java.lang.String.format;
 
@@ -29,6 +30,7 @@ public class ThingSupport {
     );
 
     protected static Thing thing;
+    protected static ThingModularCom thingModularCom;
 
     @BeforeClass
     public static void initialization() throws Exception {
@@ -52,8 +54,9 @@ public class ThingSupport {
 
     private static Thing initPuppetThing() throws Exception {
         final Thing thing = new ThingBuilder(new URI($("athing.thing.server-url")), THING_ACCESS)
-                .load((productId, thingId) -> new ThingModularBoot().boot(PRODUCT_ID, THING_ID, ThingBootArgument.parse("connect_timeout_ms=60000&timeout_ms=180000")))
+                .executor(Executors.newFixedThreadPool(20))
                 .build();
+        thing.load(thingModularCom = new DefaultThingModularCom(thing, new ModularOption()));
         reconnect(thing);
         return thing;
     }

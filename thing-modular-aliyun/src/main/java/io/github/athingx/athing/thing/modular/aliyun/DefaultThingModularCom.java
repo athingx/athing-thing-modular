@@ -4,12 +4,11 @@ import com.google.gson.Gson;
 import io.github.athingx.athing.aliyun.thing.runtime.ThingRuntime;
 import io.github.athingx.athing.aliyun.thing.runtime.linker.ThingLinker;
 import io.github.athingx.athing.standard.thing.Thing;
-import io.github.athingx.athing.standard.thing.ThingLifeCycle;
-import io.github.athingx.athing.standard.thing.boot.Inject;
-import io.github.athingx.athing.standard.thing.op.executor.ThingExecutor;
-import io.github.athingx.athing.thing.modular.ThingModularCom;
+import io.github.athingx.athing.standard.thing.ThingComListener;
+import io.github.athingx.athing.standard.thing.executor.ThingExecutor;
 import io.github.athingx.athing.thing.modular.ModuleUpgrade;
 import io.github.athingx.athing.thing.modular.ModuleUpgradeListener;
+import io.github.athingx.athing.thing.modular.ThingModularCom;
 import io.github.athingx.athing.thing.modular.aliyun.domain.Meta;
 import io.github.athingx.athing.thing.modular.aliyun.domain.Process;
 import io.github.athingx.athing.thing.modular.aliyun.domain.Push;
@@ -19,27 +18,23 @@ import io.github.oldmanpushcart.jpromisor.ListenableFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentSkipListSet;
 
 import static io.github.athingx.athing.thing.modular.aliyun.UpgradeProcessor.Step.STEP_UPGRADES_COMPLETED;
 import static io.github.athingx.athing.thing.modular.aliyun.UpgradeProcessor.Step.STEP_UPGRADES_FAILURE;
-import static java.lang.String.format;
 
-class ThingModularComImpl implements ThingModularCom, ThingLifeCycle {
+public class DefaultThingModularCom implements ThingModularCom, ThingComListener {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final Gson gson = GsonUtils.gson;
     private final ModularOption option;
-    private final Set<ModuleUpgradeListener> listeners = new ConcurrentHashMap<ModuleUpgradeListener, Object>().keySet();
+    private final ThingRuntime runtime;
+    private final Set<ModuleUpgradeListener> listeners = ConcurrentHashMap.newKeySet();
 
-    @Inject
-    private ThingRuntime runtime;
-
-    public ThingModularComImpl(ModularOption option) {
+    public DefaultThingModularCom(final Thing thing, final ModularOption option) {
         this.option = option;
+        this.runtime = ThingRuntime.getInstance(thing);
     }
 
     @Override
@@ -47,7 +42,7 @@ class ThingModularComImpl implements ThingModularCom, ThingLifeCycle {
         final Thing thing = runtime.getThing();
         final ThingLinker linker = runtime.getThingLinker();
         final String token = linker.generateToken();
-        return linker.publish(format("/ota/device/inform/%s", thing.path()), new Update(token, moduleId, version))
+        return linker.publish("/ota/device/inform/%s".formatted(thing.getPath()), new Update(token, moduleId, version))
                 .onSuccess(v -> logger.info("{}/modular report version success, token={};modular={};version={};", thing, token, moduleId, version))
                 .onFailure(e -> logger.warn("{}/modular report version failure, token={};modular={};version={};", thing, token, moduleId, version, e));
     }
@@ -73,10 +68,10 @@ class ThingModularComImpl implements ThingModularCom, ThingLifeCycle {
     public void onLoaded(Thing thing) throws Exception {
 
         final ThingLinker linker = runtime.getThingLinker();
-        final ThingExecutor executor = thing.getThingOp().getThingExecutor();
+        final ThingExecutor executor = thing.getExecutor();
 
         // 订阅PUSH
-        linker.subscribe(format("/ota/device/upgrade/%s", thing.path()), (topic, json) -> {
+        linker.subscribe("/ota/device/upgrade/%s".formatted(thing.getPath()), (topic, json) -> {
 
             final Push push = gson.fromJson(json, Push.class);
             final Meta meta = push.getMeta();
@@ -103,7 +98,7 @@ class ThingModularComImpl implements ThingModularCom, ThingLifeCycle {
 
             } catch (Exception cause) {
                 logger.warn("{}/modular upgrade failure, modular={};version={};", thing, meta.getModuleId(), meta.getVersion(), cause);
-                processor.processing(STEP_UPGRADES_FAILURE, format("upgrade failure: %s", cause.getLocalizedMessage()));
+                processor.processing(STEP_UPGRADES_FAILURE, "upgrade failure: %s".formatted(cause.getLocalizedMessage()));
             }
 
         }).sync();
@@ -137,7 +132,7 @@ class ThingModularComImpl implements ThingModularCom, ThingLifeCycle {
             final ThingLinker linker = runtime.getThingLinker();
             final String token = linker.generateToken();
             final String moduleId = meta.getModuleId();
-            linker.publish(format("/ota/device/progress/%s/", thing.path()), new Process(token, moduleId, step, desc))
+            linker.publish("/ota/device/progress/%s/".formatted(thing.getPath()), new Process(token, moduleId, step, desc))
                     .onSuccess(v -> logger.debug("{}/modular report process success, token={};modular={};step={};", thing, token, moduleId, step))
                     .onFailure(e -> logger.debug("{}/modular report process failure, token={};modular={};step={};", thing, token, moduleId, step, e))
                     .awaitUninterruptible();
